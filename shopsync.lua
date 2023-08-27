@@ -9,7 +9,7 @@
 -- Situation 1: Shops should broadcast once, `math.random() * 15 + 15` seconds after bootup (so within the range of 15 to 30 seconds)
 -- Situation 2: Shops should broadcast after a shop session or purchase is fully completed. Shops should also broadcast after the items for sale or the stocks available are changed. Optionally, shops may opt to not do this broadcast for stock changes if the stock change is part of an automatic process that runs regularly and not a shop owner manually inserting items (for example, a farm supplying a shop). Shops should enforce a 30-second minimum interval between broadcasts while still ensuring that information within broadcasts is up-to-date as of the time at which it is broadcasted. For example, if a shop receives a purchase, sends a broadcast, and then receives another purchase within 5 seconds, it should defer/queue the broadcast to 25 seconds later, unless a broadcast is already queued. The broadcast 25 seconds later should use data gathered at the time of the broadcast being sent, not at the time of it being queued.
 -- Data senders using legacy code or outdated practices may also broadcast once every 30 seconds, so data receivers should also be able to handle this situation.
--- The ShopSync standard is currently located at both https://p.sc3.io/7Ae4KxgzAM and https://gist.github.com/Kan18/916e265fe30fac450fa69da1d6c10eec 
+-- The ShopSync standard is currently located at https://github.com/slimit75/ShopSync
 -- Version: v1.1, 2023-07-03
 {
 	type = "ShopSync", -- Keep this the same
