@@ -1,16 +1,25 @@
--- ShopSync is a standard for shops and "sellshops" to broadcast data in order to improve consumer price discovery and user experience.
--- Shops, optionally, can abstain from broadcasting information if they are completely out-of-stock.
--- Note: Broadcasting any false or incorrect data is against Rule 1.5. Shops should not broadcast data if they are not connected to a currency network or are inoperable for any other reason. The intent of ShopSync was not for shops to automatically adjust their own prices based on other shops' prices, considering the current lack of any technical protections against falsified data.
--- This standard is presented as an example table, with comments explaining the fields. Everything that is not specifically "optional" or saying "can be set to nil" is required. Note that "set to nil" can also mean "not set".
--- Shops which support this standard and actively broadcast their information can optionally display "ShopSync supported", "ShopSync-compatible", etc. on monitors
--- Shops should broadcast a Lua table like this on channel 9773 in the situations presented. 
--- The modem return channel should be the computer ID of the shop turtle/computer modulo 65536. This is for backwards compatibility purposes and data receivers should ignore it if the computerID field is present.
--- Any timespans (such as seconds) noted should be governed by os.clock and os.startTimer
--- Situation 1: Shops should broadcast once, `math.random() * 15 + 15` seconds after bootup (so within the range of 15 to 30 seconds)
--- Situation 2: Shops should broadcast after a shop session or purchase is fully completed. Shops should also broadcast after the items for sale or the stocks available are changed. Optionally, shops may opt to not do this broadcast for stock changes if the stock change is part of an automatic process that runs regularly and not a shop owner manually inserting items (for example, a farm supplying a shop). Shops should enforce a 30-second minimum interval between broadcasts while still ensuring that information within broadcasts is up-to-date as of the time at which it is broadcasted. For example, if a shop receives a purchase, sends a broadcast, and then receives another purchase within 5 seconds, it should defer/queue the broadcast to 25 seconds later, unless a broadcast is already queued. The broadcast 25 seconds later should use data gathered at the time of the broadcast being sent, not at the time of it being queued.
--- Data senders using legacy code or outdated practices may also broadcast once every 30 seconds, so data receivers should also be able to handle this situation.
--- The ShopSync standard is currently located at https://github.com/slimit75/ShopSync
--- Version: v1.1, 2023-07-03
+--[[
+	ShopSync is a standard for shops and "sellshops" to broadcast data in order to improve consumer price discovery and user experience.
+	Shops, optionally, can abstain from broadcasting information if they are completely out-of-stock.
+	
+	Note: Broadcasting any false or incorrect data is against Rule 1.5. Shops should not broadcast data if they are not connected to a currency network or are inoperable for any other reason. The intent of ShopSync was not for shops to automatically adjust their own prices based on other shops' prices, considering the current lack of any technical protections against falsified data.
+	
+	This standard is presented as an example table, with comments explaining the fields. Everything that is not specifically "optional" or saying "can be set to nil" is required. Note that "set to nil" can also mean "not set".
+	Shops which support this standard and actively broadcast their information can optionally display "ShopSync supported", "ShopSync-compatible", etc. on monitors
+	
+	- Shops should broadcast a Lua table like this on channel 9773 in the situations listed below.
+	- The modem return channel should be the computer ID of the shop turtle/computer modulo 65536. This is kept for backwards compatibility purposes only, the info.computerID should be the only source of computer ID used when provided.
+	- Any timespans in terms of seconds should be governed by os.clock() and os.startTimer()
+	- Shops may broadcast:
+		- 15 to 30 seconds after the shop turtle/computer starts up
+		- After the shop inventory has been updated, such as in the event of a finished transaction or restock
+		- When the items on sale are changed, such as price or availability
+	- Legacy code built on older versions of this specification may broadcast every 30 seconds instead of the situations outlined above.
+
+	The ShopSync standard is currently located at https://github.com/slimit75/ShopSync
+	Version: v1.2-staging, 2023-09-03
+]]--
+
 {
 	type = "ShopSync", -- Keep this the same
 	info = { -- Contains general info about the shop
