@@ -26,25 +26,24 @@
 		name = "6_4's Shop", -- Name of shop. This is required.
 		description = "Shop focused on selling common materials and items.", -- Optional. Brief description of shop. Try not to include anything already provided in other information fields. Can be generic (e.g. "shop selling items")
 		owner = "6_4", -- Optional. Should be Minecraft username or other username that can help users easily identify shop owner
-		computerID = 272, -- Should be the ID of the computer or turtle running the shop. If multiple turtles or computers are involved, choose whichever one is calling modem.transmit for ShopSync. Data receivers can differentiate between unique shops using the computerID and multiShop fields. If the computerID field is not set, then data receivers should check the reply channel and use that as the computer ID.
+		computerID = 272, -- Integer representing the ID of the computer or turtle running the shop. If multiple turtles or computers are involved, choose whichever one is calling modem.transmit() for ShopSync. Data receivers can differentiate between unique shops using the computerID and multiShop fields. If the computerID field is not set, then data receivers should check the reply channel and use that as the computer ID.
 		multiShop = nil, -- If a single computer/turtle is operating multiple shops, it should assign permanent unique integer IDs to each shop. This is so that shops can be differentiated if multiple shops run on the same computer ID. This can also apply if a single computer/turtle is running both a shop and a reverse shop. Shops for which this does not apply should set this to nil.
 		software = { -- Optional
 			name = "swshop", -- Optional. Name of shop software
 			version = "3150525" -- Optional. Can be anything human-readable: compile date, git commit shorthash, version number, etc
 		},
 		location = { -- Optional
-			coordinates = { 138, 75, 248 }, -- Optional table of {x, y, z}. Should be location near shop (where items dispense, or place where monitor is visible from). Can also be automatically determined via modem GPS, if the location is not provided in the shop configuration.
+			coordinates = { 138, 75, 248 }, -- Optional table of {x, y, z}. ALL NUMBERS SHOULD BE INTEGERS!!! Should be location near shop (where items dispense, or place where monitor is visible from). Can also be automatically determined via modem GPS, if the location is not provided in the shop configuration.
 			description = "North of spawn, just outside Immediate Spawn Area.", -- Optional. Description of location
 			dimension = "overworld" -- "overworld", "nether", or "end". Optional, but include this if you are including a location.
 		},
-		otherLocations = { -- If the shop has additional locations, *pulling from the same stock/items*, this table can contain other locations in a similar format to the location table. If not, set this to nil or an empty table.
+		otherLocations = { -- If the shop has additional locations, *pulling from the same stock/items*, this table can contain other locations in an identical format to the location table. If not, set this to nil or an empty table.
 			{
 				coordinates = { 51, 63, -475 },
 				description = "Near entrance of town.",
 				dimension = "nether"
 			}
 		}
-		
 	},
 	items = { -- List of items/offers the shop contains. Shops can contain multiple listings for the same item with different prices and stocks, where the item stocks should be separate (e.g. selling 100 diamonds for 10 kst and 200 diamonds for 15 kst). Shops can broadcast out-of-stock listings (where the stock = 0); ideally, they should do so based on whether the listings display on the shop monitor.
 		{ -- This shows an example entry for a normal shop listing. Reverse shop listings should follow the format of the next example entry.
@@ -62,7 +61,7 @@
 				displayName = "Diamond" -- display name of item; this is recommended to be similar to the displayName given in getItemDetail, but shops can change this if necessary. Ideally it should be the name shown in the shop interface.
 			},
 			dynamicPrice = false, -- Also applicable to reverse shops: If dynamicPrice is false or nil, then the full stock is available for the specified price. If it is true, then only the first item bought is guaranteed to be available for the specified price, and future items bought/sold may be at a higher or lower price due to slippage.
-			stock = 100, -- Availability of this item, as an amount of items. This may be set to `nil` if `madeOnDemand` is true 
+			stock = 100, -- Integer representing the availability of this item, as an amount of items. This may be set to `nil` if `madeOnDemand` is true 
 			madeOnDemand = false, -- If shops do not dispense the item immediately after payment, and instead produce it on demand, set this to true. If not applicable, set to false or nil.
 			requiresInteraction = false -- A shop listing requires interaction if users need to click on a monitor, etc. (or do something OTHER than the /pay command) to get an item. Listings for which this does not apply can have this set to false or nil. To be clear, shops which need monitor clicks to display an address, but would accept payments to the address even if it was not selected through the monitor, can also set this to false or nil. This option only matters for normal shop listings, not "reverse shop" listings.
 		},
@@ -79,7 +78,7 @@
 				nbt = nil,
 				displayName = "Gold Ingot"
 			},
-			stock = 100, -- Current limit on amount of this item the reverse shop is willing to accept. If there is no specific item limit, shops should get the current balance, divide by the price, and round down (also see the noLimit option)
+			stock = 100, -- Integer representing the current limit on amount of this item the reverse shop is willing to accept. If there is no specific item limit, shops should get the current balance, divide by the price, and round down (also see the noLimit option)
 			noLimit = false -- If the reverse shop listing has no limit, set this to true. In this case, a shop is willing to accept more items than it can actually pay out for. If not applicable, set to false/nil. This would usually be false/nil when dynamicPrice is true.
 		},
 	}
