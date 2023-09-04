@@ -22,6 +22,7 @@
 
 {
 	type = "ShopSync", -- Keep this the same
+	version = 1, -- Required integer representing the specification version in use. Use a value of `1` for ShopSync version 1.2, a value of `nil` implies version 1.1 or prior.
 	info = { -- Contains general info about the shop
 		name = "6_4's Shop", -- Name of shop. This is required.
 		description = "Shop focused on selling common materials and items.", -- Optional. Brief description of shop. Try not to include anything already provided in other information fields. Can be generic (e.g. "shop selling items")
@@ -58,7 +59,8 @@
 			item = { -- Table describing item
 				name = "minecraft:diamond", -- name of item as given in list()
 				nbt = nil, -- if an item has an NBT hash given in list(), include it here; else, leave this nil
-				displayName = "Diamond" -- display name of item; this is recommended to be similar to the displayName given in getItemDetail, but shops can change this if necessary. Ideally it should be the name shown in the shop interface.
+				displayName = "Diamond", -- display name of item; this is recommended to be similar to the displayName given in getItemDetail, but shops can change this if necessary. Ideally it should be the name shown in the shop interface.
+				description = nil -- Optional. Brief description of the item being sold (e.g. "shulker box containing diamonds")
 			},
 			dynamicPrice = false, -- Also applicable to reverse shops: If dynamicPrice is false or nil, then the full stock is available for the specified price. If it is true, then only the first item bought is guaranteed to be available for the specified price, and future items bought/sold may be at a higher or lower price due to slippage.
 			stock = 100, -- Integer representing the availability of this item, as an amount of items. This may be set to `nil` if `madeOnDemand` is true 
@@ -76,7 +78,8 @@
 			item = { -- Table describing item: see above
 				name = "minecraft:gold_ingot",
 				nbt = nil,
-				displayName = "Gold Ingot"
+				displayName = "Gold Ingot",
+				description = nil
 			},
 			stock = 100, -- Integer representing the current limit on amount of this item the reverse shop is willing to accept. If there is no specific item limit, shops should get the current balance, divide by the price, and round down (also see the noLimit option)
 			noLimit = false -- If the reverse shop listing has no limit, set this to true. In this case, a shop is willing to accept more items than it can actually pay out for. If not applicable, set to false/nil. This would usually be false/nil when dynamicPrice is true.
