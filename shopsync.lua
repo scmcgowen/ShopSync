@@ -17,7 +17,7 @@
 	- Legacy code built on older versions of this specification may broadcast every 30 seconds instead of the situations outlined above.
 
 	The ShopSync standard is currently located at https://github.com/slimit75/ShopSync
-	Version: v1.2-staging, 2023-09-03
+	Version: v1.2-staging, 2023-09-15
 ]]--
 
 {
@@ -34,7 +34,7 @@
 			version = "3150525" -- Optional. Can be anything human-readable: compile date, git commit shorthash, version number, etc
 		},
 		location = { -- Optional
-			coordinates = { 138, 75, 248 }, -- Optional table of {x, y, z}. ALL NUMBERS SHOULD BE INTEGERS!!! Should be location near shop (where items dispense, or place where monitor is visible from). Can also be automatically determined via modem GPS, if the location is not provided in the shop configuration.
+			coordinates = { 138, 75, 248 }, -- Optional table of integers in the format {x, y, z}. Should be location near shop (where items dispense, or place where monitor is visible from). Can also be automatically determined via modem GPS, if the location is not provided in the shop configuration.
 			description = "North of spawn, just outside Immediate Spawn Area.", -- Optional. Description of location
 			dimension = "overworld" -- "overworld", "nether", or "end". Optional, but include this if you are including a location.
 		},
