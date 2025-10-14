@@ -34,6 +34,7 @@
 			name = "swshop", -- Optional. Name of shop software
 			version = "3150525" -- Optional. Can be anything human-readable: compile date, git commit shorthash, version number, etc
 		},
+		url = nil -- Optional. If provided, must be a URL to where you can purchase online. location in this case, can be set to pickup locations for online-only shops.
 		location = { -- Optional
 			coordinates = { 138, 75, 248 }, -- Optional table of integers in the format {x, y, z}. Should be location near shop (where items dispense, or place where monitor is visible from). Can also be automatically determined via modem GPS, if the location is not provided in the shop configuration.
 			description = "North of spawn, just outside Immediate Spawn Area.", -- Optional. Description of location
