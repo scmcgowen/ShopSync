@@ -27,7 +27,8 @@
 		name = "6_4's Shop", -- Name of shop. This is required.
 		description = "Shop focused on selling common materials and items.", -- Optional. Brief description of shop. Try not to include anything already provided in other information fields. Can be generic (e.g. "shop selling items")
 		owner = "6_4", -- Optional. Should be Minecraft username or other username that can help users easily identify shop owner
-		computerID = 272, -- Integer representing the ID of the computer or turtle running the shop. If multiple turtles or computers are involved, choose whichever one is calling modem.transmit() for ShopSync. Data receivers can differentiate between unique shops using the computerID and multiShop fields. If the computerID field is not set, then data receivers should check the reply channel and use that as the computer ID.
+		computerID = 272, -- Integer representing the ID of the computer or turtle running the shop. If multiple turtles or computers are involved, choose whichever one is calling modem.transmit() for ShopSync. Data receivers can differentiate between unique shops using the computerID and multiShop fields. If the computerID field is not set, then data receivers should check the reply channel and use that as the computer ID. 
+		-- computerID is required when transmitted over HTTP for shops that exist ingame. Online shops should set this to nil regardless.
 		multiShop = nil, -- If a single computer/turtle is operating multiple shops, it should assign permanent unique integer IDs to each shop. This is so that shops can be differentiated if multiple shops run on the same computer ID. This can also apply if a single computer/turtle is running both a shop and a reverse shop. Shops for which this does not apply should set this to nil.
 		software = { -- Optional
 			name = "swshop", -- Optional. Name of shop software
