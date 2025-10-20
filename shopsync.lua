@@ -23,6 +23,8 @@
 {
 	type = "ShopSync", -- Keep this the same
 	version = 1, -- Required integer representing the specification version in use. Use a value of `1` for ShopSync version 1.2, a value of `nil` implies version 1.1 or prior.
+	server = "reconnectedcc" -- Optional for modem, required for HTTP. This should be a commonly used ID for the MC server the shop operates on. Examples are "reconnectedcc" for RCC, "luminacc" for LCC, "cogs" for Create-Ive Cogs
+	id = "2147483647" -- Optional Unique ID for the ShopSync packet to act as an idempotency token. The actual implementation of the ID doesn't matter as long as its unique.
 	info = { -- Contains general info about the shop
 		name = "6_4's Shop", -- Name of shop. This is required.
 		description = "Shop focused on selling common materials and items.", -- Optional. Brief description of shop. Try not to include anything already provided in other information fields. Can be generic (e.g. "shop selling items")
