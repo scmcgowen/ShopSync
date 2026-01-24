@@ -1,8 +1,8 @@
 ## Shopsync over Classic Peripherals radio towers
 ## Shops
 Shops MUST transmit ShopSync data as two packed strings using the "ss" format, transmitted over port 9773:
-1. The serialized JSON ShopSync packet
-2. The SHA-256 hash of the serialized packet
+1. The serialized JSON ShopSync packet.
+2. The SHA-256 hash of the serialized packet.
 Example:
 string.pack(
   "ss",
