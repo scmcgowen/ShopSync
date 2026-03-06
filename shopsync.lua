@@ -63,6 +63,7 @@
 				description = nil -- Optional. Brief description of the item being sold (e.g. "shulker box containing diamonds")
 			},
 			dynamicPrice = false, -- Also applicable to reverse shops: If dynamicPrice is false or nil, then the full stock is available for the specified price. If it is true, then only the first item bought is guaranteed to be available for the specified price, and future items bought/sold may be at a higher or lower price due to slippage.
+			dynamicPriceFormula = nil -- Optional, recommended. If dynamicPrice is set to true, then this formula can be used to calculate the price of a given amount of this item. If dynamicPrice is set to false or nil, set this to nil
 			stock = 100, -- Integer representing the availability of this item, as an amount of items. This may be set to `nil` if `madeOnDemand` is true 
 			madeOnDemand = false, -- If shops do not dispense the item immediately after payment, and instead produce it on demand, set this to true. If not applicable, set to false or nil.
 			requiresInteraction = false -- A shop listing requires interaction if users need to click on a monitor, etc. (or do something OTHER than the /pay command) to get an item. Listings for which this does not apply can have this set to false or nil. To be clear, shops which need monitor clicks to display an address, but would accept payments to the address even if it was not selected through the monitor, can also set this to false or nil. This option only matters for normal shop listings, not "reverse shop" listings.
