@@ -23,16 +23,20 @@
 {
 	type = "ShopSync", -- Keep this the same
 	version = 1, -- Required integer representing the specification version in use. Use a value of `1` for ShopSync version 1.2, a value of `nil` implies version 1.1 or prior.
+	server = "reconnectedcc" -- Optional for modem, required for HTTP. This should be a commonly used ID for the MC server the shop operates on. Examples are "reconnectedcc" for RCC, "luminacc" for LCC, "cogs" for Create-Ive Cogs
+	id = "2147483647" -- Optional Unique ID for the ShopSync packet to act as an idempotency token. The actual implementation of the ID doesn't matter as long as its unique.
 	info = { -- Contains general info about the shop
 		name = "6_4's Shop", -- Name of shop. This is required.
 		description = "Shop focused on selling common materials and items.", -- Optional. Brief description of shop. Try not to include anything already provided in other information fields. Can be generic (e.g. "shop selling items")
 		owner = "6_4", -- Optional. Should be Minecraft username or other username that can help users easily identify shop owner
-		computerID = 272, -- Integer representing the ID of the computer or turtle running the shop. If multiple turtles or computers are involved, choose whichever one is calling modem.transmit() for ShopSync. Data receivers can differentiate between unique shops using the computerID and multiShop fields. If the computerID field is not set, then data receivers should check the reply channel and use that as the computer ID.
+		computerID = 272, -- Integer representing the ID of the computer or turtle running the shop. If multiple turtles or computers are involved, choose whichever one is calling modem.transmit() for ShopSync. Data receivers can differentiate between unique shops using the computerID and multiShop fields. If the computerID field is not set, then data receivers should check the reply channel and use that as the computer ID. 
+		-- computerID is required when transmitted over HTTP for shops that exist ingame. Online shops should set this to nil regardless.
 		multiShop = nil, -- If a single computer/turtle is operating multiple shops, it should assign permanent unique integer IDs to each shop. This is so that shops can be differentiated if multiple shops run on the same computer ID. This can also apply if a single computer/turtle is running both a shop and a reverse shop. Shops for which this does not apply should set this to nil.
 		software = { -- Optional
 			name = "swshop", -- Optional. Name of shop software
 			version = "3150525" -- Optional. Can be anything human-readable: compile date, git commit shorthash, version number, etc
 		},
+		url = nil -- Optional. If provided, must be a URL to where you can purchase online. location in this case, can be set to pickup locations for online-only shops.
 		location = { -- Optional
 			coordinates = { 138, 75, 248 }, -- Optional table of integers in the format {x, y, z}. Should be location near shop (where items dispense, or place where monitor is visible from). Can also be automatically determined via modem GPS, if the location is not provided in the shop configuration.
 			description = "North of spawn, just outside Immediate Spawn Area.", -- Optional. Description of location
