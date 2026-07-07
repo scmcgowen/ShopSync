@@ -29,6 +29,7 @@
 		owner = "6_4", -- Optional. Should be Minecraft username or other username that can help users easily identify shop owner
 		computerID = 272, -- Integer representing the ID of the computer or turtle running the shop. If multiple turtles or computers are involved, choose whichever one is calling modem.transmit() for ShopSync. Data receivers can differentiate between unique shops using the computerID and multiShop fields. If the computerID field is not set, then data receivers should check the reply channel and use that as the computer ID.
 		multiShop = nil, -- If a single computer/turtle is operating multiple shops, it should assign permanent unique integer IDs to each shop. This is so that shops can be differentiated if multiple shops run on the same computer ID. This can also apply if a single computer/turtle is running both a shop and a reverse shop. Shops for which this does not apply should set this to nil.
+		features = { "klog", "shipify" }, -- Optional. List of features supported by the shop software. This may be used to enable/disable certain features or to provide information about the shop's capabilities.
 		software = { -- Optional
 			name = "swshop", -- Optional. Name of shop software
 			version = "3150525" -- Optional. Can be anything human-readable: compile date, git commit shorthash, version number, etc
@@ -62,6 +63,7 @@
 				displayName = "Diamond", -- display name of item; this is recommended to be similar to the displayName given in getItemDetail, but shops can change this if necessary. Ideally it should be the name shown in the shop interface.
 				description = nil -- Optional. Brief description of the item being sold (e.g. "shulker box containing diamonds")
 			},
+			features = { "shipify" }, -- Optional. List of features supported by this item. This should generally overwrite the shop-level features, meaning that if the shop supports "klog" but the item does not, the item should not list "klog" as a feature.
 			dynamicPrice = false, -- Also applicable to reverse shops: If dynamicPrice is false or nil, then the full stock is available for the specified price. If it is true, then only the first item bought is guaranteed to be available for the specified price, and future items bought/sold may be at a higher or lower price due to slippage.
 			stock = 100, -- Integer representing the availability of this item, as an amount of items. This may be set to `nil` if `madeOnDemand` is true 
 			madeOnDemand = false, -- If shops do not dispense the item immediately after payment, and instead produce it on demand, set this to true. If not applicable, set to false or nil.
