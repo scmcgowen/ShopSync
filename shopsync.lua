@@ -63,7 +63,6 @@
 				displayName = "Diamond", -- display name of item; this is recommended to be similar to the displayName given in getItemDetail, but shops can change this if necessary. Ideally it should be the name shown in the shop interface.
 				description = nil -- Optional. Brief description of the item being sold (e.g. "shulker box containing diamonds")
 			},
-			features = { "shipify" }, -- Optional. List of features supported by this item. This should generally overwrite the shop-level features, meaning that if the shop supports "klog" but the item does not, the item should not list "klog" as a feature.
 			dynamicPrice = false, -- Also applicable to reverse shops: If dynamicPrice is false or nil, then the full stock is available for the specified price. If it is true, then only the first item bought is guaranteed to be available for the specified price, and future items bought/sold may be at a higher or lower price due to slippage.
 			stock = 100, -- Integer representing the availability of this item, as an amount of items. This may be set to `nil` if `madeOnDemand` is true 
 			madeOnDemand = false, -- If shops do not dispense the item immediately after payment, and instead produce it on demand, set this to true. If not applicable, set to false or nil.
@@ -83,6 +82,7 @@
 				displayName = "Gold Ingot",
 				description = nil
 			},
+			features = { "shipify:receive" }, -- Optional. List of features supported by this item. This should generally overwrite the shop-level features, meaning that if the shop supports "klog" but the item does not, the item should not list "klog" as a feature.
 			stock = 100, -- Integer representing the current limit on amount of this item the reverse shop is willing to accept. If there is no specific item limit, shops should get the current balance, divide by the price, and round down (also see the noLimit option)
 			noLimit = false -- If the reverse shop listing has no limit, set this to true. In this case, a shop is willing to accept more items than it can actually pay out for. If not applicable, set to false/nil. This would usually be false/nil when dynamicPrice is true.
 		},
