@@ -29,6 +29,7 @@
 		owner = "6_4", -- Optional. Should be Minecraft username or other username that can help users easily identify shop owner
 		computerID = 272, -- Integer representing the ID of the computer or turtle running the shop. If multiple turtles or computers are involved, choose whichever one is calling modem.transmit() for ShopSync. Data receivers can differentiate between unique shops using the computerID and multiShop fields. If the computerID field is not set, then data receivers should check the reply channel and use that as the computer ID.
 		multiShop = nil, -- If a single computer/turtle is operating multiple shops, it should assign permanent unique integer IDs to each shop. This is so that shops can be differentiated if multiple shops run on the same computer ID. This can also apply if a single computer/turtle is running both a shop and a reverse shop. Shops for which this does not apply should set this to nil.
+		features = { "klog", "shipify" }, -- Optional. List of features supported by the shop software. This may be used to enable/disable certain features or to provide information about the shop's capabilities.
 		software = { -- Optional
 			name = "swshop", -- Optional. Name of shop software
 			version = "3150525" -- Optional. Can be anything human-readable: compile date, git commit shorthash, version number, etc
@@ -81,6 +82,7 @@
 				displayName = "Gold Ingot",
 				description = nil
 			},
+			features = { "shipify:receive" }, -- Optional. List of features supported by this item. This should generally overwrite the shop-level features, meaning that if the shop supports "klog" but the item does not, the item should not list "klog" as a feature.
 			stock = 100, -- Integer representing the current limit on amount of this item the reverse shop is willing to accept. If there is no specific item limit, shops should get the current balance, divide by the price, and round down (also see the noLimit option)
 			noLimit = false -- If the reverse shop listing has no limit, set this to true. In this case, a shop is willing to accept more items than it can actually pay out for. If not applicable, set to false/nil. This would usually be false/nil when dynamicPrice is true.
 		},
